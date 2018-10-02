@@ -221,8 +221,8 @@ img {
       bottom: 30px;
       right: 30px; } }
 
-/* Essence Button */
-.essence-btn {
+/* etwig Button */
+.etwig-btn {
   display: inline-block;
   min-width: 170px;
   height: 50px;
@@ -236,7 +236,7 @@ img {
   background-color: #0315ff;
   letter-spacing: 1.5px;
   font-weight: 600; }
-  .essence-btn:hover, .essence-btn:focus {
+  .etwig-btn:hover, .etwig-btn:focus {
     color: #ffffff;
     background-color: #dc0345; }
 
@@ -625,7 +625,7 @@ img {
           font-weight: 700;
           font-family: "Ubuntu", sans-serif; }
       @media only screen and (max-width: 767px) {
-        .right-side-cart-area .cart-content .cart-amount-summary .essence-btn {
+        .right-side-cart-area .cart-content .cart-amount-summary .etwig-btn {
           min-width: 140px;
           width: 140px;
           padding: 0 15px; } }
@@ -832,7 +832,7 @@ img {
       visibility: hidden;
       -webkit-transition-duration: 500ms;
       transition-duration: 500ms; }
-      .single-product-wrapper .product-description .hover-content .essence-btn {
+      .single-product-wrapper .product-description .hover-content .etwig-btn {
         width: 100%; }
   .single-product-wrapper .favme {
     cursor: pointer;

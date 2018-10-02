@@ -288,9 +288,9 @@ img {
     }
 }
 
-/* Essence Button */
+/* etwig Button */
 
-.essence-btn {
+.etwig-btn {
     display: inline-block;
     min-width: 170px;
     height: 50px;
@@ -708,7 +708,7 @@ img {
                     }
                 }
             }
-            .essence-btn {
+            .etwig-btn {
                 @media #{$breakpoint-xs} {
                     min-width: 140px;
                     width: 140px;
@@ -954,7 +954,7 @@ img {
             opacity: 0;
             visibility: hidden;
             @include trans-duration(500ms);
-            .essence-btn {
+            .etwig-btn {
                 width: 100%;
             }
         }
