@@ -1,11 +1,36 @@
--- create ETWIG_ITEM table
+CREATE TABLE table_etwig
+(
+  ENAME VARCHAR2(50),
+  
+  PRICE NUMBER(8,2),
+  
+  MFGDATE   DATE,
+  
+  DEPTNO NUMBER(8)
+  
+  INSERT INTO table_etwig(ENAME,PRICE,MGFDATE,DEPTNO) VALUES('FULL SHIRT',600,'22-04-2016',10);
+  
+  INSERT INTO table_etwig(ENAME,PRICE,MGFDATE,DEPTNO) VALUES('HALF SHIRT',400,'20-04-2016',20);
 
--- insert item in table
+  INSERT INTO table_etwig(ENAME,PRICE,MGFDATE,DEPTNO) VALUES('JEANS',800,'25-04-2016',30);
 
--- select one item from table
+  INSERT INTO table_etwig(ENAME,PRICE,MGFDATE,DEPTNO) VALUES('COTTON PANT',500,'26-04-2016',40);
 
--- select all items from the table
+  INSERT INTO table_etwig(ENAME,PRICE,MGFDATE,DEPTNO) VALUES('HAT',100,'28-04-2016',50);
+  
+  INSERT INTO table_etwig(ENAME,PRICE,MGFDATE,DEPTNO) VALUES('SOCKS',50,'24-04-2016',60);
 
--- delete one item from the table
+  INSERT INTO table_etwig(ENAME,PRICE,MGFDATE,DEPTNO) VALUES('SHOE',1000,'18-04-2016',70);
+  
+  SELECT ENAME FROM table_etwig WHERE ENAME='JEANS';
+  
+  SELECT * FROM table_etwig;
+  
+  DELETE ENAME FROM table_etwig WHERE ENAME='SOCKS';
+  
+  UPDATE ENAME FROM table_etwig WHERE ENAME='SHOE';
 
--- update item name
+
+  
+
+
