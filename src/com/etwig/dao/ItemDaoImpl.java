@@ -33,7 +33,7 @@ public class ItemDaoImpl implements ItemDao {
 	@Override
 	public Item findItem(String itemId) {
 		System.out.println("In " + this.getClass().getSimpleName());
-		System.out.println("Running JDBC Inser command");
+		System.out.println("Running JDBC Insert command");
 		return null;
 	}
 
