@@ -26,8 +26,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public int saveCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return 0;
+		return customerDao.saveCustomer(customer);
 	}
 
 	@Override
