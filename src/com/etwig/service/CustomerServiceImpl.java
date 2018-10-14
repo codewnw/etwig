@@ -31,14 +31,12 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public int updateCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return 0;
+		return customerDao.updateCustomer(customer);
 	}
 
 	@Override
 	public int deleteCustomer(String customerId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return customerDao.deleteCustomer(customerId);
 	}
 
 	@Override
@@ -48,9 +46,8 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
-	public List<Customer> findCustomer() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Customer> findCustomers() {
+		return customerDao.findCustomers();
 	}
 
 }

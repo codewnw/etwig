@@ -16,6 +16,6 @@ public interface CustomerService {
 
 	Customer findCustomer(String customerId);
 
-	List<Customer> findCustomer();
+	List<Customer> findCustomers();
 
 }
