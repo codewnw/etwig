@@ -33,13 +33,24 @@ public class CustomerServlet extends HttpServlet {
 			request.getRequestDispatcher("../customers.jsp").forward(request, response);
 		}
 		else if(urlPattern.contains("delete")){
-			String[] urlElements = urlPattern.split("/");
-			String customerId = urlElements[urlElements.length-1];
+			String customerId = getCustomerIdFromUrlPatten(urlPattern);
 			customerService.deleteCustomer(customerId);
 			
 			List<Customer> customers = customerService.findCustomers();
 			request.setAttribute("customers", customers);
 			request.getRequestDispatcher("../all").forward(request, response);
+		}
+		else if(urlPattern.contains("myhome") && urlPattern.contains("CUST")) {
+			String customerId = getCustomerIdFromUrlPatten(urlPattern);
+			Customer customer = customerService.findCustomer(customerId);
+			request.setAttribute("customer", customer);
+			request.getRequestDispatcher("../../profile.jsp").forward(request, response);
+		}
+		else if(urlPattern.contains("edit") && urlPattern.contains("CUST")) {
+			String customerId = getCustomerIdFromUrlPatten(urlPattern);
+			Customer customer = customerService.findCustomer(customerId);
+			request.setAttribute("customer", customer);
+			request.getRequestDispatcher("../../customer-registration.jsp").forward(request, response);
 		}
 		/*else if(urlPattern.contains("update")){
 			String[] urlElements = urlPattern.split("/");
@@ -54,19 +65,30 @@ public class CustomerServlet extends HttpServlet {
 */
 	}
 
+	private String getCustomerIdFromUrlPatten(String urlPattern) {
+		String[] urlElements = urlPattern.split("/");
+		String customerId = urlElements[urlElements.length-1];
+		return customerId;
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String urlPattern = request.getRequestURI();
-		if (urlPattern.contains("register")) {
-			String firstName = request.getParameter("firstName");
-			String lastName = request.getParameter("lastName");
+		if (urlPattern.contains("save")) {
+			if(request.getParameter("id") == null || request.getParameter("id").equals("")) {
+				System.out.println("You are new user....");
+				String firstName = request.getParameter("firstName");
+				String lastName = request.getParameter("lastName");
 
-			Customer customer = new Customer();
-			customer.setFirstName(firstName);
-			customer.setLastName(lastName);
+				Customer customer = new Customer();
+				customer.setFirstName(firstName);
+				customer.setLastName(lastName);
 
-			customerService.saveCustomer(customer);
-
+				customerService.saveCustomer(customer);
+			}
+			else {
+				System.out.println("You are returning user....");
+			}
 			response.sendRedirect("all");
 
 		}

@@ -41,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public Customer findCustomer(String customerId) {
-		System.out.println("In " + this.getClass().getSimpleName());
+//		System.out.println("In " + this.getClass().getSimpleName()+" Customer ID: "+customerId);
 		return customerDao.findCustomer(customerId);
 	}
 

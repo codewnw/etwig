@@ -20,6 +20,8 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	private static final String selectAllCustomers = "SELECT * FROM ETWIG_CUSTOMER";
 
+	private static final String selectCustomerQuery = "SELECT * FROM ETWIG_CUSTOMER WHERE ID = ?";
+
 	private static final String deleteCustomer = "DELETE FROM ETWIG_CUSTOMER WHERE ID = ?";
 
 	@Override
@@ -60,9 +62,24 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public Customer findCustomer(String customerId) {
-		System.out.println("In " + this.getClass().getSimpleName());
-		System.out.println("Running JDBC Insert command......Customer");
+		System.out.println("In " + this.getClass().getSimpleName() + " Customer ID: " + customerId);
+		try (Connection con = DbUtil.getCon(); PreparedStatement pstmt = con.prepareStatement(selectCustomerQuery)) {
+			pstmt.setString(1, customerId);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				String id = rs.getString(1);
+				String firstName = rs.getString(2);
+				String lastName = rs.getString(3);
 
+				Customer customer = new Customer();
+				customer.setId(id);
+				customer.setFirstName(firstName);
+				customer.setLastName(lastName);
+				return customer;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
