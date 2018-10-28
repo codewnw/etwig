@@ -31,43 +31,40 @@ public class CustomerServlet extends HttpServlet {
 			List<Customer> customers = customerService.findCustomers();
 			request.setAttribute("customers", customers);
 			request.getRequestDispatcher("../customers.jsp").forward(request, response);
-		}
-		else if(urlPattern.contains("delete")){
+		} else if (urlPattern.contains("delete")) {
 			String customerId = getCustomerIdFromUrlPatten(urlPattern);
 			customerService.deleteCustomer(customerId);
-			
+
 			List<Customer> customers = customerService.findCustomers();
 			request.setAttribute("customers", customers);
 			request.getRequestDispatcher("../all").forward(request, response);
-		}
-		else if(urlPattern.contains("myhome") && urlPattern.contains("CUST")) {
+		} else if (urlPattern.contains("myhome") && urlPattern.contains("CUST")) {
 			String customerId = getCustomerIdFromUrlPatten(urlPattern);
 			Customer customer = customerService.findCustomer(customerId);
 			request.setAttribute("customer", customer);
 			request.getRequestDispatcher("../../profile.jsp").forward(request, response);
-		}
-		else if(urlPattern.contains("edit") && urlPattern.contains("CUST")) {
+		} else if (urlPattern.contains("edit") && urlPattern.contains("CUST")) {
 			String customerId = getCustomerIdFromUrlPatten(urlPattern);
 			Customer customer = customerService.findCustomer(customerId);
 			request.setAttribute("customer", customer);
 			request.getRequestDispatcher("../../customer-registration.jsp").forward(request, response);
 		}
-		/*else if(urlPattern.contains("update")){
-			String[] urlElements = urlPattern.split("/");
-			String customerId = urlElements[urlElements.length-1];
-			customerService.updateCustomer(customerId);
-			
-			List<Customer> customers = customerService.findCustomers();
-			request.setAttribute("customers", customers);
-			request.getRequestDispatcher("../all").forward(request, response);
-			
-		}
-*/
+		/*
+		 * else if(urlPattern.contains("update")){ String[] urlElements =
+		 * urlPattern.split("/"); String customerId = urlElements[urlElements.length-1];
+		 * customerService.updateCustomer(customerId);
+		 * 
+		 * List<Customer> customers = customerService.findCustomers();
+		 * request.setAttribute("customers", customers);
+		 * request.getRequestDispatcher("../all").forward(request, response);
+		 * 
+		 * }
+		 */
 	}
 
 	private String getCustomerIdFromUrlPatten(String urlPattern) {
 		String[] urlElements = urlPattern.split("/");
-		String customerId = urlElements[urlElements.length-1];
+		String customerId = urlElements[urlElements.length - 1];
 		return customerId;
 	}
 
@@ -75,22 +72,22 @@ public class CustomerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String urlPattern = request.getRequestURI();
 		if (urlPattern.contains("save")) {
-			if(request.getParameter("id") == null || request.getParameter("id").equals("")) {
-				System.out.println("You are new user....");
-				String firstName = request.getParameter("firstName");
-				String lastName = request.getParameter("lastName");
-
-				Customer customer = new Customer();
-				customer.setFirstName(firstName);
-				customer.setLastName(lastName);
-
-				customerService.saveCustomer(customer);
+			if (request.getAttribute("customer") != null) {
+				String customerId = "";
+				if (request.getParameter("id") == null || request.getParameter("id").equals("")) {
+					System.out.println("You are new user....");
+					customerId = customerService.saveCustomer((Customer)request.getAttribute("customer"));
+				} else {
+					System.out.println("You are returning user....");
+					if (request.getAttribute("customer") == null) {
+						request.getRequestDispatcher("../process-customer-registration.jsp").forward(request, response);
+					}
+					customerService.updateCustomer((Customer)request.getAttribute("customer"));
+				}
+				response.sendRedirect("myhome/" + customerId);
+			} else {
+				request.getRequestDispatcher("../process-customer-registration.jsp").forward(request, response);
 			}
-			else {
-				System.out.println("You are returning user....");
-			}
-			response.sendRedirect("all");
-
 		}
 	}
 

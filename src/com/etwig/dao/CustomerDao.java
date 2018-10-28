@@ -8,7 +8,7 @@ import com.etwig.model.Customer;
 public interface CustomerDao {
 	boolean createCustomerTable();
 
-	int saveCustomer(Customer customer);
+	String saveCustomer(Customer customer);
 
 	int updateCustomer(Customer customer);
 

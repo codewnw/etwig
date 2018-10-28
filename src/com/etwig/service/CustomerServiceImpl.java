@@ -14,18 +14,14 @@ public class CustomerServiceImpl implements CustomerService{
 		super();
 		this.customerDao = new CustomerDaoImpl();
 	}
-	
-	
 
 	@Override
-	
 	public boolean createCustomerTable() {
-		// TODO Auto-generated method stub
-		return false;
+		return customerDao.createCustomerTable();
 	}
 
 	@Override
-	public int saveCustomer(Customer customer) {
+	public String saveCustomer(Customer customer) {
 		return customerDao.saveCustomer(customer);
 	}
 
