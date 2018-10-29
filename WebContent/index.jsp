@@ -9,36 +9,37 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>etwig - Fashion Ecommerce Template</title>
+    <title>etwig - Fashion E-commerce</title>
 
     <!-- Favicon  -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="${pageContext.request.contextPath}/img/core-img/favicon.ico">
 
     <!-- Core Style CSS -->
-    <link rel="stylesheet" href="css/core-style.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/core-style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
 
 </head>
 
 <body>
+<%@ include file="common/header.jsp" %>
     <!-- ##### Header Area Start ##### -->
-    <header class="header_area">
+    <!-- <header class="header_area">
         <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
-            <!-- Classy Menu -->
+            Classy Menu
             <nav class="classy-navbar" id="etwigNav">
-                <!-- Logo -->
+                Logo
                 <a class="nav-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
-                <!-- Navbar Toggler -->
+                Navbar Toggler
                 <div class="classy-navbar-toggler">
                     <span class="navbarToggler"><span></span><span></span><span></span></span>
                 </div>
-                <!-- Menu -->
+                Menu
                 <div class="classy-menu">
-                    <!-- close btn -->
+                    close btn
                     <div class="classycloseIcon">
                         <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                     </div>
-                    <!-- Nav Start -->
+                    Nav Start
                     <div class="classynav">
                         <ul>
                             <li><a href="#">Shop</a>
@@ -88,28 +89,28 @@
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
                     </div>
-                    <!-- Nav End -->
+                    Nav End
                 </div>
             </nav>
 
-            <!-- Header Meta Data -->
+            Header Meta Data
             <div class="header-meta d-flex clearfix justify-content-end">
-                <!-- Search Area -->
+                Search Area
                 <div class="search-area">
                     <form action="#" method="post">
                         <input type="search" name="search" id="headerSearch" placeholder="Type for search">
                         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
-                <!-- Favourite Area -->
+                Favourite Area
                 <div class="favourite-area">
                     <a href="#"><img src="img/core-img/heart.svg" alt=""></a>
                 </div>
-                <!-- User Login Info -->
+                User Login Info
                 <div class="user-login-info">
                     <a href="customer-registration.jsp"><img src="img/core-img/user.svg" alt=""></a>
                 </div>
-                <!-- Cart Area -->
+                Cart Area
                 <div class="cart-area">
                     <a href="#" id="etwigCartBtn"><img src="img/core-img/bag.svg" alt=""> <span>3</span></a>
                 </div>
@@ -117,7 +118,7 @@
 
         </div>
     </header>
-    <!-- ##### Header Area End ##### -->
+ -->    <!-- ##### Header Area End ##### -->
 
     <!-- ##### Right Side Cart Area ##### -->
     <div class="cart-bg-overlay"></div>

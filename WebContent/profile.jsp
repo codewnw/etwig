@@ -42,27 +42,16 @@
             <a href="cart.html">
                 <h2>${requestScope.customer.firstName} &nbsp; ${requestScope.customer.lastName}</h2>
             </a>
-            <p class="product-price"><span class="old-price">$65.00</span> $49.00</p>
-            <p class="product-desc">Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin.</p>
+            <p class="product-price">${requestScope.customer.mobile},&nbsp; ${requestScope.customer.email}</p>
+            <p class="product-desc">
+            ${requestScope.customer.street1},&nbsp; ${requestScope.customer.street2}<br />
+            ${requestScope.customer.city}<br />
+            ${requestScope.customer.state}, &nbsp; ${requestScope.customer.postCode}<br />
+            ${requestScope.customer.country}
+            </p>
 
             <!-- Form -->
-            <form class="cart-form clearfix" method="post">
-                <!-- Select Box -->
-                <div class="select-box d-flex mt-50 mb-30">
-                    <select name="select" id="productSize" class="mr-5">
-                        <option value="value">Size: XL</option>
-                        <option value="value">Size: X</option>
-                        <option value="value">Size: M</option>
-                        <option value="value">Size: S</option>
-                    </select>
-                    <select name="select" id="productColor">
-                        <option value="value">Color: Black</option>
-                        <option value="value">Color: White</option>
-                        <option value="value">Color: Red</option>
-                        <option value="value">Color: Purple</option>
-                    </select>
-                </div>
-                <!-- Cart & Favourite Box -->
+        
                 <div class="cart-fav-box d-flex align-items-center">
                     <!-- Cart -->
                     <a href="${pageContext.request.contextPath}/customers/edit/${requestScope.customer.id}" class="btn etwig-btn">Edit Profile</a>
@@ -71,7 +60,7 @@
                         <a href="#" class="favme fa fa-heart"></a>
                     </div>
                 </div>
-            </form>
+           
         </div>
     </section>
     <!-- ##### Single Product Details Area End ##### -->

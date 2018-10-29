@@ -47,7 +47,6 @@ public class LoginDaoImpl implements LoginDao {
 
 	@Override
 	public boolean doesUserExist(String userName) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -65,13 +64,11 @@ public class LoginDaoImpl implements LoginDao {
 
 	@Override
 	public int updateLogin() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int deleteLogin() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

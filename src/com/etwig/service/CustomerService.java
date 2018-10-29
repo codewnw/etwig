@@ -15,6 +15,8 @@ public interface CustomerService {
 	int deleteCustomer(String customerId);
 
 	Customer findCustomer(String customerId);
+	
+	Customer findCustomerByUserName(String userName);
 
 	List<Customer> findCustomers();
 

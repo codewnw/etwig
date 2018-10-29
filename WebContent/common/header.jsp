@@ -1,5 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page session="true" %>
 
 <!-- ##### Header Area Start ##### -->
 <header class="header_area">
@@ -9,7 +11,7 @@
 		<nav class="classy-navbar" id="etwigNav">
 			<!-- Logo -->
 			<a class="nav-brand"
-				href="${pageContext.request.contextPath}/index.html"><img
+				href="${pageContext.request.contextPath}/index.jsp"><img
 				src="${pageContext.request.contextPath}/img/core-img/logo.png"
 				alt=""></a>
 			<!-- Navbar Toggler -->
@@ -63,7 +65,7 @@
 							</div></li>
 						<li><a href="#">Pages</a>
 							<ul class="dropdown">
-								<li><a href="index.html">Home</a></li>
+								<li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
 								<li><a href="${pageContext.request.contextPath}/shop.html">Shop</a></li>
 								<li><a
 									href="${pageContext.request.contextPath}/single-product-details.html">Product
@@ -105,13 +107,22 @@
 					src="${pageContext.request.contextPath}/img/core-img/heart.svg"
 					alt=""></a>
 			</div>
+			<c:if test="${sessionScope.userName eq null}">
 			<!-- User Login Info -->
 			<div class="user-login-info">
 				<a
+					href="${pageContext.request.contextPath}/login"><img
+					src="${pageContext.request.contextPath}/img/core-img/user.svg"
+					alt="">&nbsp;Login</a>
+			</div>
+			<div class="user-login-info">
+					<a
 					href="${pageContext.request.contextPath}/customer-registration.html"><img
 					src="${pageContext.request.contextPath}/img/core-img/user.svg"
-					alt=""></a>
+					alt="">&nbsp;Sign Up</a>
 			</div>
+			</c:if>
+			
 			<!-- Cart Area -->
 			<div class="cart-area">
 				<a href="${pageContext.request.contextPath}/#" id="etwigCartBtn"><img

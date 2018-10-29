@@ -16,6 +16,8 @@ public interface CustomerDao {
 
 	Customer findCustomer(String customerId);
 
+	Customer findCustomerByUserName(String userName);
+
 	List<Customer> findCustomers();
 
 }

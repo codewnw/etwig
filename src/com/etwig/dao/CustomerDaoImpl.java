@@ -24,6 +24,8 @@ public class CustomerDaoImpl implements CustomerDao {
 	private static final String selectAllCustomers = "SELECT * FROM ETWIG_CUSTOMER";
 
 	private static final String selectCustomerQuery = "SELECT * FROM ETWIG_CUSTOMER WHERE ID = ?";
+	
+	private static final String selectCustomerByUserNameQuery = "SELECT * FROM ETWIG_CUSTOMER WHERE EMAIL = ?";
 
 	private static final String deleteCustomer = "DELETE FROM ETWIG_CUSTOMER WHERE ID = ?";
 
@@ -148,6 +150,36 @@ public class CustomerDaoImpl implements CustomerDao {
 			e.printStackTrace();
 		}
 		return customers;
+	}
+
+	@Override
+	public Customer findCustomerByUserName(String userName) {
+		System.out.println(">> " + this.getClass().getName());
+		try (Connection con = DbUtil.getCon(); PreparedStatement pstmt = con.prepareStatement(selectCustomerByUserNameQuery)) {
+			pstmt.setString(1, userName);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Customer customer = new Customer();
+
+				customer.setId(rs.getString(1));
+				customer.setFirstName(rs.getString(2));
+				customer.setLastName(rs.getString(3));
+				customer.setMobile(rs.getString(4));
+				customer.setEmail(rs.getString(5));
+				customer.setStreet1(rs.getString(6));
+				customer.setStreet2(rs.getString(7));
+				customer.setCity(rs.getString(8));
+				customer.setState(rs.getString(9));
+				customer.setCountry(rs.getString(10));
+				customer.setPostCode(rs.getString(11));
+				customer.setTncAccepted(rs.getBoolean(12));
+
+				return customer;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

@@ -75,14 +75,12 @@ public class CustomerServlet extends HttpServlet {
 			if (request.getAttribute("customer") != null) {
 				String customerId = "";
 				if (request.getParameter("id") == null || request.getParameter("id").equals("")) {
-					System.out.println("You are new user....");
-					customerId = customerService.saveCustomer((Customer)request.getAttribute("customer"));
+					customerId = customerService.saveCustomer((Customer) request.getAttribute("customer"));
 				} else {
-					System.out.println("You are returning user....");
 					if (request.getAttribute("customer") == null) {
 						request.getRequestDispatcher("../process-customer-registration.jsp").forward(request, response);
 					}
-					customerService.updateCustomer((Customer)request.getAttribute("customer"));
+					customerService.updateCustomer((Customer) request.getAttribute("customer"));
 				}
 				response.sendRedirect("myhome/" + customerId);
 			} else {

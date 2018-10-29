@@ -7,9 +7,9 @@ import com.etwig.dao.CustomerDaoImpl;
 import com.etwig.dao.ItemDaoImpl;
 import com.etwig.model.Customer;
 
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 	private CustomerDao customerDao;
-	
+
 	public CustomerServiceImpl() {
 		super();
 		this.customerDao = new CustomerDaoImpl();
@@ -37,13 +37,17 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public Customer findCustomer(String customerId) {
-//		System.out.println("In " + this.getClass().getSimpleName()+" Customer ID: "+customerId);
 		return customerDao.findCustomer(customerId);
 	}
 
 	@Override
 	public List<Customer> findCustomers() {
 		return customerDao.findCustomers();
+	}
+
+	@Override
+	public Customer findCustomerByUserName(String userName) {
+		return customerDao.findCustomerByUserName(userName);
 	}
 
 }

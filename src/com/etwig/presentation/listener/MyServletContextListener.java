@@ -4,21 +4,21 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import com.etwig.dao.LoginDao;
-import com.etwig.dao.LoginDaoImpl;
 import com.etwig.service.CustomerService;
 import com.etwig.service.CustomerServiceImpl;
+import com.etwig.service.LoginService;
+import com.etwig.service.LoginServiceImpl;
 
 @WebListener
 public class MyServletContextListener implements ServletContextListener {
 
 	private CustomerService customerService;
 
-	private LoginDao loginDao;
+	private LoginService loginService;
 
 	public MyServletContextListener() {
 		customerService = new CustomerServiceImpl();
-		loginDao = new LoginDaoImpl();
+		loginService = new LoginServiceImpl();
 	}
 
 	public void contextDestroyed(ServletContextEvent sce) {
@@ -29,7 +29,7 @@ public class MyServletContextListener implements ServletContextListener {
 		String tableCreationRequired = sce.getServletContext().getInitParameter("tableCreation");
 		if (tableCreationRequired != null && tableCreationRequired.equalsIgnoreCase("yes")) {
 			customerService.createCustomerTable();
-			loginDao.createLoginTable();
+			loginService.createLoginTable();
 		}
 		System.out.println("<< " + this.getClass().getName());
 	}
