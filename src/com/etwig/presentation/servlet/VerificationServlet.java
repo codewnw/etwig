@@ -14,40 +14,45 @@ import com.etwig.service.CustomerService;
 import com.etwig.service.CustomerServiceImpl;
 import com.etwig.service.LoginService;
 import com.etwig.service.LoginServiceImpl;
+import com.etwig.service.VerificationService;
+import com.etwig.service.VerificationServiceImpl;
 
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/verify")
+public class VerificationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private LoginService loginService;
+	private VerificationService verificationService;
 	
 	private CustomerService customerService;
-
-	public LoginServlet() {
-		loginService = new LoginServiceImpl();
+	
+	private LoginService loginService;
+	
+	public VerificationServlet() {
 		customerService = new CustomerServiceImpl();
+		verificationService = new VerificationServiceImpl();
+		loginService = new LoginServiceImpl();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("otp-verification.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String userName = request.getParameter("userName");
-		String password = request.getParameter("password");
-
-		boolean isValidUser = loginService.isValidUser(userName, password);
-		if (isValidUser) {
-			request.setAttribute("message", "Login Successfull!");
+		if(verificationService.varifyOtp(userName, Integer.parseInt(request.getParameter("otp")))) {
+			verificationService.deleteOtp(userName);
+			loginService.updateLoginStatus(userName, "Verified");
+			request.setAttribute("message", "Verification Successfull!");
 			HttpSession session = request.getSession();
-			session.setAttribute(userName, userName);
+			session.setAttribute("userName", userName);
 			Customer customer = customerService.findCustomerByUserName(userName);
 			request.setAttribute("customer", customer);
 			request.getRequestDispatcher("profile.jsp").forward(request, response);
-		} else {
-			response.sendRedirect("login.jsp?message=Login Failed! Either wrong credentials or you have not verified the OTP. Please try again...");
+		}
+		else {
+			response.sendRedirect("otp-verification.jsp?message=Verfication Failed! Please try again...");
 		}
 	}
 

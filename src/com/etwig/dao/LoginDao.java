@@ -10,7 +10,9 @@ public interface LoginDao {
 
 	int saveLogin(String userName, String password);
 
-	int updateLogin();
+	int updateLoginStatus(String userName, String newStatus);
+	
+	int updateLoginPassword(String userName, String password);
 
 	int deleteLogin();
 }

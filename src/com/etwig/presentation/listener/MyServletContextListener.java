@@ -8,6 +8,8 @@ import com.etwig.service.CustomerService;
 import com.etwig.service.CustomerServiceImpl;
 import com.etwig.service.LoginService;
 import com.etwig.service.LoginServiceImpl;
+import com.etwig.service.VerificationService;
+import com.etwig.service.VerificationServiceImpl;
 
 @WebListener
 public class MyServletContextListener implements ServletContextListener {
@@ -15,10 +17,13 @@ public class MyServletContextListener implements ServletContextListener {
 	private CustomerService customerService;
 
 	private LoginService loginService;
+	
+	private VerificationService verificationService;
 
 	public MyServletContextListener() {
 		customerService = new CustomerServiceImpl();
 		loginService = new LoginServiceImpl();
+		verificationService = new VerificationServiceImpl();
 	}
 
 	public void contextDestroyed(ServletContextEvent sce) {
@@ -30,6 +35,7 @@ public class MyServletContextListener implements ServletContextListener {
 		if (tableCreationRequired != null && tableCreationRequired.equalsIgnoreCase("yes")) {
 			customerService.createCustomerTable();
 			loginService.createLoginTable();
+			verificationService.createVarificationTable();
 		}
 		System.out.println("<< " + this.getClass().getName());
 	}

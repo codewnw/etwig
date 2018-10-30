@@ -115,7 +115,7 @@
 			<div class="row h-100 align-items-center">
 				<div class="col-12">
 					<div class="page-title text-center">
-						<h2>Login</h2>
+						<h2>OTP Verification</h2>
 					</div>
 				</div>
 			</div>
@@ -133,10 +133,9 @@
 
 						<div class="cart-page-heading mb-30">
 							<h5 style="color: red">${param.message}</h5>
-							<a href="${pageContext.request.contextPath}/verify">Verify OTP</a>
 						</div>
 
-						<form action="${pageContext.request.contextPath}/login"
+						<form action="${pageContext.request.contextPath}/verify"
 							method="post">
 							<div class="row">
 								<div class="col-12 mb-3">
@@ -146,12 +145,12 @@
 								</div>
 
 								<div class="col-12 mb-3">
-									<label for="password">Password <span>*</span></label> <input
-										type="password" class="form-control" id="password" value=""
-										name="password" required>
+									<label for="password">OTP (One Time Password) <span>*</span></label> <input
+										type="text" class="form-control" id="otp" value=""
+										name="otp" required>
 								</div>
 								<input type="submit" class="btn etwig-btn btn-block"
-									value="Login">
+									value="Verify OTP">
 							</div>
 						</form>
 					</div>

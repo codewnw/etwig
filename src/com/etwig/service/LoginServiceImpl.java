@@ -33,13 +33,18 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public int updateLogin() {
-		return loginDao.updateLogin();
+	public int deleteLogin() {
+		return loginDao.deleteLogin();
 	}
 
 	@Override
-	public int deleteLogin() {
-		return loginDao.deleteLogin();
+	public int updateLoginStatus(String userName, String newStatus) {
+		return loginDao.updateLoginStatus(userName, newStatus);
+	}
+
+	@Override
+	public int updateLoginPassword(String userName, String password) {
+		return loginDao.updateLoginPassword(userName, password);
 	}
 
 }

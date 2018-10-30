@@ -12,9 +12,11 @@ import com.etwig.util.IdGenerator;
 
 public class LoginDaoImpl implements LoginDao {
 
-	private static final String createLoginTableQuery = "CREATE TABLE ETWIG_LOGIN (USER_NAME VARCHAR, PASSWORD VARCHAR)";
-	private static final String isValidUserQuery = "SELECT * FROM ETWIG_LOGIN WHERE USER_NAME = ? AND PASSWORD = ?";
-	private static final String insertLoginQuery = "INSERT INTO ETWIG_LOGIN VALUES(?, ?)";
+	private static final String createLoginTableQuery = "CREATE TABLE ETWIG_LOGIN (USER_NAME VARCHAR, PASSWORD VARCHAR, STATUS VARCHAR)";
+	private static final String isValidUserQuery = "SELECT * FROM ETWIG_LOGIN WHERE USER_NAME = ? AND PASSWORD = ? AND STATUS != 'Not Verified'";
+	private static final String insertLoginQuery = "INSERT INTO ETWIG_LOGIN VALUES(?, ?, ?)";
+	private static final String updateLoginPasswordQuery = "UPDATE ETWIG_LOGIN SET PASSWORD = ? WHERE USER_NAME = ?";
+	private static final String updateLoginStatusQuery = "UPDATE ETWIG_LOGIN SET STATUS = ? WHERE USER_NAME = ?";
 
 	@Override
 	public boolean createLoginTable() {
@@ -55,6 +57,7 @@ public class LoginDaoImpl implements LoginDao {
 		try (Connection con = DbUtil.getCon(); PreparedStatement pstmt = con.prepareStatement(insertLoginQuery)) {
 			pstmt.setString(1, userName);
 			pstmt.setString(2, password);
+			pstmt.setString(3, "Not Verified");
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -63,7 +66,27 @@ public class LoginDaoImpl implements LoginDao {
 	}
 
 	@Override
-	public int updateLogin() {
+	public int updateLoginStatus(String userName, String newStatus) {
+		try (Connection con = DbUtil.getCon(); PreparedStatement pstmt = con.prepareStatement(updateLoginStatusQuery)) {
+			pstmt.setString(1, newStatus);
+			pstmt.setString(2, userName);
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public int updateLoginPassword(String userName, String newPassword) {
+		try (Connection con = DbUtil.getCon();
+				PreparedStatement pstmt = con.prepareStatement(updateLoginPasswordQuery)) {
+			pstmt.setString(1, newPassword);
+			pstmt.setString(2, userName);
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 

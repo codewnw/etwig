@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.etwig.model.Customer;
 import com.etwig.service.CustomerService;
 import com.etwig.service.CustomerServiceImpl;
+import com.etwig.service.MailService;
+import com.etwig.service.MailServiceImpl;
+import com.etwig.service.VerificationService;
+import com.etwig.service.VerificationServiceImpl;
+import com.etwig.util.OtpGenerator;
 
 @WebServlet("/customers/*")
 public class CustomerServlet extends HttpServlet {
@@ -19,9 +24,14 @@ public class CustomerServlet extends HttpServlet {
 
 	private CustomerService customerService;
 
+	private MailService mailService;
+
+	private VerificationService verificationService;
+
 	public CustomerServlet() {
-		super();
-		this.customerService = new CustomerServiceImpl();
+		customerService = new CustomerServiceImpl();
+		mailService = new MailServiceImpl();
+		verificationService = new VerificationServiceImpl();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -75,12 +85,19 @@ public class CustomerServlet extends HttpServlet {
 			if (request.getAttribute("customer") != null) {
 				String customerId = "";
 				if (request.getParameter("id") == null || request.getParameter("id").equals("")) {
-					customerId = customerService.saveCustomer((Customer) request.getAttribute("customer"));
+					Customer newCustomer = (Customer) request.getAttribute("customer");
+					customerId = customerService.saveCustomer(newCustomer);
+					int otp = OtpGenerator.getOtp();
+					System.out.println("OTP is: " + otp);
+					mailService.sendMail(newCustomer.getEmail(), "OTP", otp + "");
+					verificationService.saveOtp(newCustomer.getEmail(), otp);
 				} else {
 					if (request.getAttribute("customer") == null) {
 						request.getRequestDispatcher("../process-customer-registration.jsp").forward(request, response);
 					}
-					customerService.updateCustomer((Customer) request.getAttribute("customer"));
+					Customer customer = (Customer) request.getAttribute("customer");
+					customerId = customer.getId();
+					customerService.updateCustomer(customer);
 				}
 				response.sendRedirect("myhome/" + customerId);
 			} else {

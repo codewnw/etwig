@@ -117,7 +117,7 @@
 			</div>
 			<div class="user-login-info">
 					<a
-					href="${pageContext.request.contextPath}/customer-registration.html"><img
+					href="${pageContext.request.contextPath}/customer-registration.jsp"><img
 					src="${pageContext.request.contextPath}/img/core-img/user.svg"
 					alt="">&nbsp;Sign Up</a>
 			</div>

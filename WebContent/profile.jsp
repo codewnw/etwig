@@ -29,6 +29,7 @@
 
         <!-- Single Product Thumb -->
         <div class="single_product_thumb clearfix">
+        <span>${requestScope.message}</span>
             <div class="product_thumbnail_slides owl-carousel">
                 <img src="img/product-img/product-big-1.jpg" alt="">
                 <img src="img/product-img/product-big-2.jpg" alt="">
