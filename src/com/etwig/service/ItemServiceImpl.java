@@ -17,14 +17,12 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public boolean createItemTable() {
-		// TODO Auto-generated method stub
-		return false;
+		return itemDao.createItemTable();
 	}
 
 	@Override
-	public int saveItem(Item item) {
-		// TODO Auto-generated method stub
-		return 0;
+	public String saveItem(Item item) {
+		return itemDao.saveItem(item);
 	}
 
 	@Override
@@ -41,14 +39,13 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public Item findItem(String itemId) {
-		System.out.println("In " + this.getClass().getSimpleName());
+		System.out.println(">> " + this.getClass().getSimpleName());
 		return itemDao.findItem(itemId);
 	}
 
 	@Override
 	public List<Item> findItems() {
-		// TODO Auto-generated method stub
-		return null;
+		return itemDao.findItems();
 	}
 
 }

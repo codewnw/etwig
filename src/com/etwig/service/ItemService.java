@@ -8,7 +8,7 @@ public interface ItemService {
 
 	boolean createItemTable();
 
-	int saveItem(Item item);
+	String saveItem(Item item);
 
 	int updateItem(Item item);
 
